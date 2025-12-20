@@ -308,6 +308,43 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ========================================
+// 9. SPECIALIZED SECTION SLIDESHOW
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const specializedSlides = document.querySelectorAll('.specialized-slideshow .specialized-slide');
+    const specializedIcons = document.querySelectorAll('.specialized-icon');
+
+    if (specializedSlides.length > 0) {
+        let currentSpecializedSlide = 0;
+
+        function nextSpecializedSlide() {
+            // Retirer la classe active de la slide actuelle
+            specializedSlides[currentSpecializedSlide].classList.remove('active');
+
+            // Cacher l'icône actuelle
+            if (specializedIcons[currentSpecializedSlide]) {
+                specializedIcons[currentSpecializedSlide].style.display = 'none';
+            }
+
+            // Passer à la slide suivante
+            currentSpecializedSlide = (currentSpecializedSlide + 1) % specializedSlides.length;
+
+            // Ajouter la classe active à la nouvelle slide
+            specializedSlides[currentSpecializedSlide].classList.add('active');
+
+            // Afficher la nouvelle icône
+            if (specializedIcons[currentSpecializedSlide]) {
+                specializedIcons[currentSpecializedSlide].style.display = 'block';
+            }
+        }
+
+        // Changer d'image toutes les 5 secondes
+        setInterval(nextSpecializedSlide, 5000);
+    }
+});
+
 // Ajouter les animations CSS pour les notifications
 const style = document.createElement('style');
 style.textContent = `

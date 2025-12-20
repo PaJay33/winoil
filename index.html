@@ -164,6 +164,7 @@
         <div class="services-background-slideshow">
             <div class="slide active" style="background-image: url('assets/images/Carbuvoiture.jpg');"></div>
             <div class="slide" style="background-image: url('assets/images/pirogue.jpg');"></div>
+            <div class="slide" style="background-image: url('assets/images/pirogue.jpg');"></div>
             <div class="slide" style="background-image: url('assets/images/station.jpg');"></div>
             <div class="slide" style="background-image: url('assets/images/industrie.jpg');"></div>
         </div>
@@ -180,10 +181,6 @@
                     <i class="fas fa-gas-pump"></i>
                     <span>Carburant</span>
                 </div>
-                <div class="service-item" data-aos="zoom-in" data-aos-delay="200">
-                    <i class="fas fa-car-side"></i>
-                    <span>Lavage Auto</span>
-                </div>
                 <div class="service-item" data-aos="zoom-in" data-aos-delay="300">
                     <i class="fas fa-oil-can"></i>
                     <span>Vidange</span>
@@ -191,10 +188,6 @@
                 <div class="service-item" data-aos="zoom-in" data-aos-delay="400">
                     <i class="fas fa-store"></i>
                     <span>Boutique</span>
-                </div>
-                <div class="service-item" data-aos="zoom-in" data-aos-delay="500">
-                    <i class="fas fa-tire"></i>
-                    <span>Gonflage</span>
                 </div>
             </div>
         </div>
@@ -273,9 +266,17 @@
 
             <div class="specialized-content">
                 <div class="specialized-image" data-aos="fade-right">
-                    <img src="assets/images/pirogue.jpg" alt="Pirogue de pêche" style="width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius-lg);">
+                    <div class="specialized-slideshow">
+                        <div class="specialized-slide active">
+                            <img src="assets/images/pirogue.jpg" alt="Pirogue de pêche" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                        <div class="specialized-slide">
+                            <img src="assets/images/industrie.jpg" alt="Industries" style="width: 100%; height: 100%; object-fit: cover;">
+                        </div>
+                    </div>
                     <div class="image-overlay">
-                        <i class="fas fa-ship"></i>
+                        <i class="fas fa-ship specialized-icon"></i>
+                        <i class="fas fa-industry specialized-icon" style="display: none;"></i>
                     </div>
                 </div>
 
