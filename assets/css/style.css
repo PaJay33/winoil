@@ -739,62 +739,89 @@ body {
 }
 
 /* ========================================
-   5. SECTION POINTS FORTS
+   5. POURQUOI CHOISIR WINOIL
    ======================================== */
 
-.features-section {
+.why-choose-section {
     padding: var(--spacing-xl) 0;
-    background: var(--bg-darker);
+    background: var(--bg-dark);
 }
 
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+.why-choose-content {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.why-choose-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.why-choose-grid {
+    display: flex;
+    flex-direction: column;
     gap: 2rem;
 }
 
-.feature-card {
-    background: var(--bg-card);
-    padding: 2.5rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border-color);
-    transition: all var(--transition-normal);
-    text-align: center;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    background: var(--bg-card-hover);
-    border-color: var(--primary-violet);
-    box-shadow: var(--shadow-primary);
-}
-
-.feature-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
-    background: var(--gradient-primary);
-    border-radius: var(--radius-full);
+.why-item {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    color: white;
-    transition: transform var(--transition-normal);
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-left: 3px solid transparent;
+    padding-left: 2rem;
+    transition: all var(--transition-normal);
 }
 
-.feature-card:hover .feature-icon {
-    transform: scale(1.1) rotate(5deg);
+.why-item:hover {
+    border-left-color: var(--primary-violet);
+    transform: translateX(10px);
 }
 
-.feature-card h3 {
+.why-number {
+    font-size: 3rem;
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+.why-item h3 {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.75rem;
 }
 
-.feature-card p {
+.why-item p {
     color: var(--text-secondary);
     line-height: 1.8;
+    font-size: 1.05rem;
+}
+
+@media (max-width: 768px) {
+    .why-item {
+        flex-direction: column;
+        gap: 1rem;
+        padding-left: 1rem;
+    }
+
+    .why-number {
+        font-size: 2.5rem;
+        min-width: auto;
+    }
+
+    .why-item h3 {
+        font-size: 1.25rem;
+    }
+
+    .why-item p {
+        font-size: 1rem;
+    }
 }
 
 /* ========================================
