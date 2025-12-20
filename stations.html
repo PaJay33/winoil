@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Trouvez la station-service WinOil la plus proche de vous au Sénégal. Localisez nos stations à Dakar, Thiès, Saint-Louis et dans tout le pays.">
+    <title>Nos Stations - WinOil Sénégal</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Leaflet CSS pour la carte -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <style>
+        /* Styles spécifiques pour la page Stations */
+        .stations-hero {
+            padding: 120px 0 80px;
+            background: linear-gradient(135deg, rgba(181, 101, 216, 0.1), rgba(233, 75, 122, 0.1));
+            text-align: center;
+        }
+
+        .stations-hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .stations-hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .search-station {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-station input {
+            width: 100%;
+            padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+            background: var(--bg-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            transition: all var(--transition-normal);
+        }
+
+        .search-station input:focus {
+            outline: none;
+            border-color: var(--primary-violet);
+            box-shadow: 0 0 0 4px rgba(181, 101, 216, 0.1);
+        }
+
+        .search-station i {
+            position: absolute;
+            left: 1.5rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-violet);
+            font-size: 1.3rem;
+        }
+
+        .stations-content {
+            padding: 4rem 0;
+        }
+
+        .stations-grid-layout {
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .stations-list {
+            max-height: 700px;
+            overflow-y: auto;
+            padding-right: 1rem;
+        }
+
+        .stations-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .stations-list::-webkit-scrollbar-thumb {
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+
+        .station-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+
+        .station-card:hover,
+        .station-card.active {
+            border-color: var(--primary-violet);
+            box-shadow: var(--shadow-primary);
+            transform: translateX(5px);
+        }
+
+        .station-card.active {
+            background: rgba(181, 101, 216, 0.1);
+        }
+
+        .station-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .station-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+
+        .station-city {
+            color: var(--primary-pink);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .station-badge {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .station-badge.opening-soon {
+            background: linear-gradient(135deg, #FFA500, #FFD700);
+        }
+
+        .station-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .info-row i {
+            width: 20px;
+            color: var(--primary-violet);
+            font-size: 1rem;
+        }
+
+        .station-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .station-btn {
+            flex: 1;
+            padding: 0.6rem 1rem;
+            background: transparent;
+            border: 1px solid var(--primary-violet);
+            border-radius: var(--radius-sm);
+            color: var(--primary-violet);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .station-btn:hover {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+        }
+
+        .map-container {
+            position: sticky;
+            top: 100px;
+            height: 700px;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--shadow-primary);
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-tab {
+            padding: 0.8rem 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            font-weight: 600;
+        }
+
+        .filter-tab:hover,
+        .filter-tab.active {
+            background: var(--gradient-primary);
+            border-color: transparent;
+            color: white;
+        }
+
+        .filter-tab i {
+            margin-right: 0.5rem;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-results i {
+            font-size: 4rem;
+            color: var(--primary-violet);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 968px) {
+            .stations-grid-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .map-container {
+                position: relative;
+                top: 0;
+                height: 500px;
+            }
+
+            .stations-list {
+                max-height: none;
+            }
+
+            .stations-hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .stations-hero h1 {
+                font-size: 2rem;
+            }
+
+            .filter-tabs {
+                flex-direction: column;
+            }
+
+            .filter-tab {
+                width: 100%;
+            }
+
+            .station-actions {
+                flex-direction: column;
+            }
+        }
+
+        /* Custom Leaflet Popup */
+        .leaflet-popup-content-wrapper {
+            background: var(--bg-card);
+            color: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .leaflet-popup-content {
+            margin: 1rem;
+        }
+
+        .leaflet-popup-tip {
+            background: var(--bg-card);
+        }
+
+        .popup-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-info {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <img src="assets/images/logo.png" alt="WinOil Logo">
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link">Accueil</a></li>
+                    <li><a href="index.html#apropos" class="nav-link">À Propos</a></li>
+                    <li><a href="index.html#services" class="nav-link">Nos Services</a></li>
+                    <li><a href="stations.html" class="nav-link active">Nos Stations</a></li>
+                    <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="nav-actions">
+                    <a href="index.html#contact" class="btn btn-primary">Nous Contacter</a>
+                    <button class="mobile-toggle" id="mobileToggle">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="stations-hero">
+        <div class="container">
+            <h1><span class="gradient-text">Trouvez</span> votre station WinOil</h1>
+            <p>Localisez la station-service WinOil la plus proche de vous. Service 24/7, carburant premium, partout au Sénégal.</p>
+
+            <div class="search-station">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Rechercher par ville, quartier ou nom de station...">
+            </div>
+        </div>
+    </section>
+
+    <!-- Filtres -->
+    <section class="stations-content">
+        <div class="container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Toutes les stations
+                </button>
+                <button class="filter-tab" data-filter="dakar">
+                    <i class="fas fa-city"></i>
+                    Dakar
+                </button>
+                <button class="filter-tab" data-filter="thies">
+                    <i class="fas fa-building"></i>
+                    Thiès
+                </button>
+                <button class="filter-tab" data-filter="saint-louis">
+                    <i class="fas fa-landmark"></i>
+                    Saint-Louis
+                </button>
+                <button class="filter-tab" data-filter="24/7">
+                    <i class="fas fa-clock"></i>
+                    Ouvert 24/7
+                </button>
+            </div>
+
+            <div class="stations-grid-layout">
+                <!-- Liste des stations -->
+                <div class="stations-list" id="stationsList">
+                    <!-- Station 1 - Dakar Plateau -->
+                    <div class="station-card" data-city="dakar" data-lat="14.6937" data-lng="-17.4441">
+                        <div class="station-header">
+                            <div>
+                                <h3 class="station-name">WinOil Plateau</h3>
+                                <div class="station-city">Dakar - Plateau</div>
+                            </div>
+                            <span class="station-badge">Ouvert 24/7</span>
+                        </div>
+                        <div class="station-info">
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Avenue Georges Pompidou, Plateau, Dakar</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 33 XXX XX XX</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <span>24h/24 - 7j/7</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Carburant • Lavage • Vidange • Boutique</span>
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <a href="tel:+22133XXXXXX" class="station-btn">
+                                <i class="fas fa-phone"></i> Appeler
+                            </a>
+                            <a href="https://maps.google.com/?q=14.6937,-17.4441" target="_blank" class="station-btn">
+                                <i class="fas fa-directions"></i> Itinéraire
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Station 2 - Dakar Almadies -->
+                    <div class="station-card" data-city="dakar" data-lat="14.7392" data-lng="-17.5053">
+                        <div class="station-header">
+                            <div>
+                                <h3 class="station-name">WinOil Almadies</h3>
+                                <div class="station-city">Dakar - Almadies</div>
+                            </div>
+                            <span class="station-badge">Ouvert 24/7</span>
+                        </div>
+                        <div class="station-info">
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Route de Ngor, Almadies, Dakar</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 33 XXX XX XX</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <span>24h/24 - 7j/7</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Carburant • Lavage Auto • Boutique Premium</span>
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <a href="tel:+22133XXXXXX" class="station-btn">
+                                <i class="fas fa-phone"></i> Appeler
+                            </a>
+                            <a href="https://maps.google.com/?q=14.7392,-17.5053" target="_blank" class="station-btn">
+                                <i class="fas fa-directions"></i> Itinéraire
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Station 3 - Rufisque -->
+                    <div class="station-card" data-city="dakar" data-lat="14.7167" data-lng="-17.2667">
+                        <div class="station-header">
+                            <div>
+                                <h3 class="station-name">WinOil Rufisque</h3>
+                                <div class="station-city">Rufisque</div>
+                            </div>
+                            <span class="station-badge">Ouvert 24/7</span>
+                        </div>
+                        <div class="station-info">
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Route Nationale 1, Rufisque</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 33 XXX XX XX</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <span>24h/24 - 7j/7</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Carburant • Vidange • Gonflage • Boutique</span>
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <a href="tel:+22133XXXXXX" class="station-btn">
+                                <i class="fas fa-phone"></i> Appeler
+                            </a>
+                            <a href="https://maps.google.com/?q=14.7167,-17.2667" target="_blank" class="station-btn">
+                                <i class="fas fa-directions"></i> Itinéraire
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Station 4 - Thiès -->
+                    <div class="station-card" data-city="thies" data-lat="14.7886" data-lng="-16.9296">
+                        <div class="station-header">
+                            <div>
+                                <h3 class="station-name">WinOil Thiès Centre</h3>
+                                <div class="station-city">Thiès</div>
+                            </div>
+                            <span class="station-badge">Ouvert 24/7</span>
+                        </div>
+                        <div class="station-info">
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Avenue Général de Gaulle, Thiès</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 33 XXX XX XX</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <span>24h/24 - 7j/7</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Carburant • Lavage • Vidange • Service Flotte</span>
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <a href="tel:+22133XXXXXX" class="station-btn">
+                                <i class="fas fa-phone"></i> Appeler
+                            </a>
+                            <a href="https://maps.google.com/?q=14.7886,-16.9296" target="_blank" class="station-btn">
+                                <i class="fas fa-directions"></i> Itinéraire
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Station 5 - Saint-Louis -->
+                    <div class="station-card" data-city="saint-louis" data-lat="16.0178" data-lng="-16.4897">
+                        <div class="station-header">
+                            <div>
+                                <h3 class="station-name">WinOil Saint-Louis</h3>
+                                <div class="station-city">Saint-Louis</div>
+                            </div>
+                            <span class="station-badge opening-soon">Bientôt ouvert</span>
+                        </div>
+                        <div class="station-info">
+                            <div class="info-row">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Route de Dakar, Saint-Louis</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-phone"></i>
+                                <span>+221 33 XXX XX XX</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-clock"></i>
+                                <span>Ouverture prévue : Q1 2025</span>
+                            </div>
+                            <div class="info-row">
+                                <i class="fas fa-gas-pump"></i>
+                                <span>Carburant • Lavage • Vidange • Boutique</span>
+                            </div>
+                        </div>
+                        <div class="station-actions">
+                            <a href="index.html#contact" class="station-btn">
+                                <i class="fas fa-envelope"></i> Nous contacter
+                            </a>
+                            <a href="https://maps.google.com/?q=16.0178,-16.4897" target="_blank" class="station-btn">
+                                <i class="fas fa-map"></i> Voir l'emplacement
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Carte -->
+                <div class="map-container">
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <!-- Message si aucun résultat -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Aucune station trouvée</h3>
+                <p>Essayez de modifier vos critères de recherche</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <img src="assets/images/logo.png" alt="WinOil Logo" class="footer-logo">
+                    <p class="footer-description">
+                        Votre station-service de confiance au Sénégal. Qualité, rapidité et service d'excellence.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="index.html#apropos">À Propos</a></li>
+                        <li><a href="index.html#services">Nos Services</a></li>
+                        <li><a href="stations.html">Nos Stations</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#services">Carburant Premium</a></li>
+                        <li><a href="index.html#services">Lavage Auto</a></li>
+                        <li><a href="index.html#services">Vidange & Huile</a></li>
+                        <li><a href="index.html#services">Service Flotte</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-map-marker-alt"></i><span>Route de Rufisque, Dakar</span></li>
+                        <li><i class="fas fa-phone"></i><span>+221 33 XXX XX XX</span></li>
+                        <li><i class="fas fa-envelope"></i><span>contact@winoil.sn</span></li>
+                        <li><i class="fas fa-clock"></i><span>24/7 - Toujours ouvert</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 WinOil. Tous droits réservés.</p>
+                <div class="footer-bottom-links">
+                    <a href="#">Mentions légales</a>
+                    <span>|</span>
+                    <a href="#">Politique de confidentialité</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top -->
+    <button id="scrollTop" class="scroll-top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <!-- Custom JS -->
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/stations.js"></script>
+</body>
+</html>

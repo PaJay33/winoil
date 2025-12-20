@@ -64,6 +64,15 @@ if (mobileToggle) {
 // Navigation active state et smooth scroll
 navLinks.forEach(link => {
     link.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+
+        // Ne pas empêcher le comportement par défaut si c'est un lien vers une autre page
+        if (!href.startsWith('#')) {
+            // C'est un lien vers une autre page, laisser le navigateur gérer
+            return;
+        }
+
+        // C'est une ancre interne, faire le smooth scroll
         e.preventDefault();
 
         // Retirer classe active de tous les liens
@@ -82,8 +91,7 @@ navLinks.forEach(link => {
         }
 
         // Smooth scroll vers la section
-        const targetId = this.getAttribute('href');
-        const targetSection = document.querySelector(targetId);
+        const targetSection = document.querySelector(href);
 
         if (targetSection) {
             const navHeight = navbar.offsetHeight;
@@ -567,7 +575,211 @@ window.addEventListener('load', function() {
     // Log de chargement complet
     console.log('%c🎉 WinOil Website Loaded Successfully!', 'color: #B565D8; font-size: 16px; font-weight: bold;');
     console.log('%c🚀 Powered by modern web technologies', 'color: #E94B7A; font-size: 12px;');
+
+    // Animation des compteurs de la pompe à essence
+    animatePumpCounters();
 });
+
+// ========================================
+// ANIMATION POMPE À ESSENCE (HERO)
+// ========================================
+
+function animatePumpCounters() {
+    const priceElement = document.getElementById('priceTicker');
+    const litersElement = document.getElementById('litersTicker');
+
+    if (!priceElement || !litersElement) return;
+
+    let price = 0;
+    let liters = 0;
+    const targetPrice = 8500;
+    const targetLiters = 25.5;
+    const duration = 3000; // 3 secondes
+
+    const priceStep = targetPrice / (duration / 50);
+    const litersStep = targetLiters / (duration / 50);
+
+    const interval = setInterval(() => {
+        price += priceStep;
+        liters += litersStep;
+
+        if (price >= targetPrice) {
+            price = targetPrice;
+            liters = targetLiters;
+            clearInterval(interval);
+
+            // Redémarrer après 2 secondes
+            setTimeout(() => {
+                price = 0;
+                liters = 0;
+                priceElement.textContent = '0.00';
+                litersElement.textContent = '0.0';
+                setTimeout(animatePumpCounters, 500);
+            }, 2000);
+        }
+
+        priceElement.textContent = Math.floor(price).toLocaleString('fr-FR');
+        litersElement.textContent = liters.toFixed(1);
+    }, 50);
+}
+
+// ========================================
+// STATS POMPES EN TEMPS RÉEL
+// ========================================
+
+// Données simulées pour chaque pompe
+const pumpData = {
+    1: { clients: 0, liters: 0, targetClients: 47, targetLiters: 1250 },
+    2: { clients: 0, liters: 0, targetClients: 32, targetLiters: 890 },
+    3: { clients: 0, liters: 0, targetClients: 61, targetLiters: 1680 }
+};
+
+// Observer pour démarrer l'animation quand la section est visible
+const pumpStatsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !entry.target.classList.contains('stats-animated')) {
+            entry.target.classList.add('stats-animated');
+            animatePumpStats();
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observer la section des pompes
+const pumpSection = document.querySelector('.fuel-pumps-section');
+if (pumpSection) {
+    pumpStatsObserver.observe(pumpSection);
+}
+
+function animatePumpStats() {
+    const duration = 2500;
+    const interval = 30;
+    const steps = duration / interval;
+
+    // Animer chaque pompe
+    Object.keys(pumpData).forEach(pumpId => {
+        const data = pumpData[pumpId];
+        const clientsElement = document.querySelector(`[data-pump-clients="${pumpId}"]`);
+        const litersElement = document.querySelector(`[data-pump-liters="${pumpId}"]`);
+        const progressElement = document.querySelector(`[data-pump-progress="${pumpId}"]`);
+
+        if (!clientsElement || !litersElement || !progressElement) return;
+
+        const clientsStep = data.targetClients / steps;
+        const litersStep = data.targetLiters / steps;
+        const progressTarget = (data.targetLiters / 2000) * 100; // Capacité max 2000L
+        const progressStep = progressTarget / steps;
+
+        let currentClients = 0;
+        let currentLiters = 0;
+        let currentProgress = 0;
+
+        const timer = setInterval(() => {
+            currentClients += clientsStep;
+            currentLiters += litersStep;
+            currentProgress += progressStep;
+
+            if (currentClients >= data.targetClients) {
+                currentClients = data.targetClients;
+                currentLiters = data.targetLiters;
+                currentProgress = progressTarget;
+                clearInterval(timer);
+            }
+
+            clientsElement.textContent = Math.floor(currentClients);
+            litersElement.textContent = Math.floor(currentLiters).toLocaleString('fr-FR');
+            progressElement.style.width = `${currentProgress}%`;
+        }, interval);
+    });
+
+    // Animer les stats globales
+    animateGlobalStats();
+}
+
+function animateGlobalStats() {
+    const totalClients = Object.values(pumpData).reduce((sum, data) => sum + data.targetClients, 0);
+    const totalLiters = Object.values(pumpData).reduce((sum, data) => sum + data.targetLiters, 0);
+
+    const clientsElement = document.getElementById('totalClientsToday');
+    const litersElement = document.getElementById('totalLitersToday');
+    const avgTimeElement = document.getElementById('avgServiceTime');
+
+    if (!clientsElement || !litersElement || !avgTimeElement) return;
+
+    const duration = 2500;
+    const interval = 30;
+    const steps = duration / interval;
+
+    const clientsStep = totalClients / steps;
+    const litersStep = totalLiters / steps;
+
+    let currentClients = 0;
+    let currentLiters = 0;
+
+    const timer = setInterval(() => {
+        currentClients += clientsStep;
+        currentLiters += litersStep;
+
+        if (currentClients >= totalClients) {
+            currentClients = totalClients;
+            currentLiters = totalLiters;
+            clearInterval(timer);
+        }
+
+        clientsElement.textContent = Math.floor(currentClients);
+        litersElement.textContent = Math.floor(currentLiters).toLocaleString('fr-FR') + 'L';
+    }, interval);
+
+    // Animer le temps moyen (petite variation)
+    let avgTime = 0;
+    const avgTimer = setInterval(() => {
+        avgTime += 0.05;
+        if (avgTime >= 2.5) {
+            avgTime = 2.5;
+            clearInterval(avgTimer);
+        }
+        avgTimeElement.textContent = avgTime.toFixed(1);
+    }, interval);
+}
+
+// Mise à jour périodique toutes les 5 secondes (simulation)
+setInterval(() => {
+    const pumpsSection = document.querySelector('.fuel-pumps-section');
+    if (pumpsSection && pumpsSection.classList.contains('stats-animated')) {
+        // Incrémenter légèrement les valeurs
+        Object.keys(pumpData).forEach(pumpId => {
+            const data = pumpData[pumpId];
+            const randomClients = Math.floor(Math.random() * 2);
+            const randomLiters = Math.floor(Math.random() * 30) + 10;
+
+            data.targetClients += randomClients;
+            data.targetLiters += randomLiters;
+
+            const clientsElement = document.querySelector(`[data-pump-clients="${pumpId}"]`);
+            const litersElement = document.querySelector(`[data-pump-liters="${pumpId}"]`);
+            const progressElement = document.querySelector(`[data-pump-progress="${pumpId}"]`);
+
+            if (clientsElement && litersElement && progressElement) {
+                clientsElement.textContent = data.targetClients;
+                litersElement.textContent = data.targetLiters.toLocaleString('fr-FR');
+
+                const progressTarget = (data.targetLiters / 2000) * 100;
+                progressElement.style.width = `${Math.min(progressTarget, 100)}%`;
+            }
+        });
+
+        // Mettre à jour les stats globales
+        const totalClients = Object.values(pumpData).reduce((sum, data) => sum + data.targetClients, 0);
+        const totalLiters = Object.values(pumpData).reduce((sum, data) => sum + data.targetLiters, 0);
+
+        const clientsElement = document.getElementById('totalClientsToday');
+        const litersElement = document.getElementById('totalLitersToday');
+
+        if (clientsElement && litersElement) {
+            clientsElement.textContent = totalClients;
+            litersElement.textContent = totalLiters.toLocaleString('fr-FR') + 'L';
+        }
+    }
+}, 5000);
 
 // ========================================
 // 14. EASTER EGG (BONUS)
