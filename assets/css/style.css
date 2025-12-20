@@ -282,6 +282,21 @@ body {
     right: 0;
     bottom: 0;
     z-index: 0;
+    background-image: url('../images/station.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1;
 }
 
 .gradient-overlay {
@@ -290,8 +305,9 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: radial-gradient(ellipse at top left, rgba(181, 101, 216, 0.15), transparent 50%),
-                radial-gradient(ellipse at bottom right, rgba(233, 75, 122, 0.15), transparent 50%);
+    background: radial-gradient(ellipse at top left, rgba(181, 101, 216, 0.3), transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(233, 75, 122, 0.3), transparent 50%);
+    z-index: 2;
 }
 
 .animated-shapes {
