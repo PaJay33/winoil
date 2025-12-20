@@ -282,6 +282,32 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
+// ========================================
+// 8. SERVICES BACKGROUND SLIDESHOW
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const slides = document.querySelectorAll('.services-background-slideshow .slide');
+
+    if (slides.length > 0) {
+        let currentSlide = 0;
+
+        function nextSlide() {
+            // Retirer la classe active de la slide actuelle
+            slides[currentSlide].classList.remove('active');
+
+            // Passer à la slide suivante
+            currentSlide = (currentSlide + 1) % slides.length;
+
+            // Ajouter la classe active à la nouvelle slide
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Changer d'image toutes les 4 secondes
+        setInterval(nextSlide, 4000);
+    }
+});
+
 // Ajouter les animations CSS pour les notifications
 const style = document.createElement('style');
 style.textContent = `

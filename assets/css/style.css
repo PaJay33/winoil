@@ -801,6 +801,64 @@ body {
    6. SERVICES RAPIDES
    ======================================== */
 
+.services-section {
+    position: relative;
+    padding: var(--spacing-xl) 0;
+    overflow: hidden;
+}
+
+.services-background-slideshow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.services-background-slideshow .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+}
+
+.services-background-slideshow .slide.active {
+    opacity: 1;
+}
+
+.services-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1;
+}
+
+.services-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(181, 101, 216, 0.4) 0%, rgba(233, 75, 122, 0.4) 100%);
+    z-index: 2;
+}
+
+.services-content-wrapper {
+    position: relative;
+    z-index: 3;
+}
+
 .quick-services {
     padding: var(--spacing-lg) 0;
     background: var(--bg-dark);
