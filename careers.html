@@ -65,16 +65,16 @@
                 </p>
                 <div class="hero-stats">
                     <div class="stat-item">
-                        <div class="stat-number" id="openPositionsCount">0</div>
-                        <div class="stat-label">Postes Ouverts</div>
-                    </div>
-                    <div class="stat-item">
                         <div class="stat-number">50+</div>
                         <div class="stat-label">Employés</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-number">3</div>
                         <div class="stat-label">Stations</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label">Engagement</div>
                     </div>
                 </div>
             </div>
@@ -141,71 +141,19 @@
         </div>
     </section>
 
-    <!-- Job Filter Section -->
-    <section class="jobs-filter-section">
-        <div class="container">
-            <div class="filter-controls" data-aos="fade-up">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fas fa-briefcase"></i> Tous les postes
-                </button>
-                <button class="filter-btn" data-filter="operations">
-                    <i class="fas fa-cogs"></i> Opérations
-                </button>
-                <button class="filter-btn" data-filter="commercial">
-                    <i class="fas fa-handshake"></i> Commercial
-                </button>
-                <button class="filter-btn" data-filter="administration">
-                    <i class="fas fa-user-tie"></i> Administration
-                </button>
-                <button class="filter-btn" data-filter="technique">
-                    <i class="fas fa-wrench"></i> Technique
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Jobs Listing Section -->
-    <section class="jobs-listing-section">
-        <div class="container">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="section-title">Postes <span class="gradient-text">Disponibles</span></h2>
-                <p class="section-subtitle">Découvrez nos opportunités actuelles</p>
-            </div>
-
-            <!-- Jobs Container - Will be populated dynamically -->
-            <div class="jobs-container" id="jobsContainer">
-                <!-- Loading State -->
-                <div class="loading-state" id="loadingState">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>Chargement des offres...</p>
-                </div>
-
-                <!-- Empty State -->
-                <div class="empty-state" id="emptyState" style="display: none;">
-                    <i class="fas fa-inbox"></i>
-                    <h3>Aucun poste disponible</h3>
-                    <p>Revenez bientôt ou envoyez-nous une candidature spontanée</p>
-                    <a href="#spontaneous-application" class="btn btn-primary">Candidature Spontanée</a>
-                </div>
-
-                <!-- Jobs will be inserted here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
     <!-- Spontaneous Application Section -->
     <section id="spontaneous-application" class="spontaneous-section">
         <div class="container">
             <div class="spontaneous-content" data-aos="fade-up">
-                <div class="spontaneous-text">
-                    <h2>Vous ne trouvez pas le poste idéal ?</h2>
-                    <p>Envoyez-nous une candidature spontanée ! Nous sommes toujours à la recherche de talents pour renforcer notre équipe.</p>
+                <div class="spontaneous-header">
+                    <h2>Candidature Spontanée</h2>
+                    <p>Rejoignez notre équipe ! Envoyez-nous votre candidature et nous vous contacterons dès qu'une opportunité correspondant à votre profil se présente.</p>
                 </div>
                 <div class="spontaneous-actions">
-                    <a href="#application-form" class="btn btn-primary btn-lg">
+                    <button id="showApplicationForm" class="btn btn-primary btn-lg">
                         <i class="fas fa-paper-plane"></i>
-                        Postuler Spontanément
-                    </a>
+                        Envoyer ma candidature
+                    </button>
                 </div>
             </div>
         </div>
@@ -220,8 +168,8 @@
             </button>
 
             <div class="modal-header">
-                <h2 id="modalTitle">Postuler pour ce poste</h2>
-                <p id="modalJobTitle" class="job-title-modal"></p>
+                <h2 id="modalTitle">Candidature Spontanée</h2>
+                <p id="modalJobTitle" class="job-title-modal">Envoyez-nous votre CV et nous vous contacterons</p>
             </div>
 
             <form id="applicationForm" class="application-form">

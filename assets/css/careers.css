@@ -169,80 +169,91 @@
 }
 
 .jobs-container {
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
 .job-card {
-    background: #0a0a0a;
-    border: 1px solid #1a1a1a;
-    border-radius: 12px;
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    transition: border-color 0.2s;
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    padding: 2.5rem;
+    margin-bottom: 2rem;
+    transition: all 0.3s;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .job-card:hover {
     border-color: #B565D8;
+    box-shadow: 0 8px 24px rgba(181, 101, 216, 0.15);
+    transform: translateY(-2px);
 }
 
 .job-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 1rem;
-    gap: 1rem;
+    margin-bottom: 1.5rem;
+    gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid #f0f0f0;
 }
 
 .job-title-group h3 {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: white;
-    margin-bottom: 0.5rem;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
 }
 
 .job-category {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
-    background: rgba(181, 101, 216, 0.15);
-    border-radius: 15px;
-    font-size: 0.8rem;
-    color: #B565D8;
-}
-
-.job-type {
-    padding: 0.5rem 1rem;
-    background: linear-gradient(135deg, #B565D8 0%, #E94B7A 100%);
-    color: white;
-    border-radius: 15px;
+    padding: 0.4rem 1rem;
+    background: rgba(181, 101, 216, 0.1);
+    border: 1px solid #B565D8;
+    border-radius: 20px;
     font-size: 0.85rem;
+    color: #B565D8;
     font-weight: 600;
 }
 
+.job-type {
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, #B565D8 0%, #E94B7A 100%);
+    color: white;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(181, 101, 216, 0.3);
+}
+
 .job-description {
-    color: #a0a0a0;
-    line-height: 1.7;
+    color: #555;
+    line-height: 1.8;
     margin-bottom: 1.5rem;
+    font-size: 1rem;
 }
 
 .job-details {
     display: flex;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #1a1a1a;
+    gap: 2.5rem;
+    margin-bottom: 2rem;
+    padding: 1.25rem 0;
+    flex-wrap: wrap;
 }
 
 .job-detail-item {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    color: #666;
-    font-size: 0.9rem;
+    gap: 0.75rem;
+    color: #333;
+    font-size: 0.95rem;
+    font-weight: 500;
 }
 
 .job-detail-item i {
     color: #B565D8;
+    font-size: 1.1rem;
 }
 
 .job-actions {

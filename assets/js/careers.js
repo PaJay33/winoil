@@ -116,13 +116,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Load jobs from API or use sample data
-    loadJobs();
-
     // Setup event listeners
-    setupFilterButtons();
     setupModal();
     setupApplicationForm();
+    setupSpontaneousButton();
 });
 
 /* ================================
@@ -343,6 +340,18 @@ function filterJobs(category) {
    ================================ */
 
 /**
+ * Setup spontaneous application button
+ */
+function setupSpontaneousButton() {
+    const showFormBtn = document.getElementById('showApplicationForm');
+    if (showFormBtn) {
+        showFormBtn.addEventListener('click', function() {
+            openApplicationModal(null);
+        });
+    }
+}
+
+/**
  * Setup modal event listeners
  */
 function setupModal() {
@@ -375,7 +384,7 @@ function setupModal() {
 }
 
 /**
- * Open application modal for a specific job
+ * Open application modal for spontaneous application
  * This function is called globally from HTML
  */
 window.openApplicationModal = function(jobId) {
@@ -385,18 +394,10 @@ window.openApplicationModal = function(jobId) {
     const jobIdInput = document.getElementById('jobId');
     const applicationForm = document.getElementById('applicationForm');
 
-    // Find the job
-    const job = jobsData.find(j => j.id === jobId);
-
-    if (job) {
-        modalTitle.textContent = `Postuler pour ce poste`;
-        modalJobTitle.textContent = job.title;
-        jobIdInput.value = job.id;
-    } else {
-        modalTitle.textContent = 'Candidature Spontanée';
-        modalJobTitle.textContent = '';
-        jobIdInput.value = '';
-    }
+    // Always show spontaneous application form
+    modalTitle.textContent = 'Candidature Spontanée';
+    modalJobTitle.textContent = 'Envoyez-nous votre CV et nous vous contacterons';
+    jobIdInput.value = '';
 
     // Reset form
     applicationForm.reset();
