@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nos Services - WinOil Station</title>
-    <meta name="description" content="Découvrez tous nos services : carburants premium, lavage auto, vidange, boutique et plus encore">
+    <title>Nos Services - WinOil</title>
+    <meta name="description" content="Découvrez nos services : carburants premium, lavage auto, vidange, boutique et solutions pour flottes">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -19,256 +19,9 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
-
-    <style>
-        /* Services Page Specific Styles */
-        .services-hero {
-            padding: 8rem 0 4rem;
-            background: linear-gradient(135deg, #B565D8 0%, #E94B7A 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .services-hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            opacity: 0.3;
-        }
-
-        .services-hero .container {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-
-        .services-hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .services-hero p {
-            font-size: 1.25rem;
-            color: rgba(255, 255, 255, 0.9);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .services-content {
-            padding: 4rem 0;
-        }
-
-        .service-detail-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            margin-bottom: 3rem;
-            transition: all var(--transition-normal);
-        }
-
-        .service-detail-card:hover {
-            border-color: var(--primary-violet);
-            box-shadow: 0 10px 40px rgba(181, 101, 216, 0.15);
-            transform: translateY(-5px);
-        }
-
-        .service-header {
-            padding: 2.5rem;
-            background: linear-gradient(135deg, rgba(181, 101, 216, 0.1) 0%, rgba(233, 75, 122, 0.1) 100%);
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .service-icon-large {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-md);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            flex-shrink: 0;
-        }
-
-        .service-header-text h3 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 0.5rem;
-        }
-
-        .service-header-text p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .service-body {
-            padding: 2.5rem;
-        }
-
-        .service-description {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 2rem;
-        }
-
-        .service-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: rgba(181, 101, 216, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            transition: all var(--transition-normal);
-        }
-
-        .feature-item:hover {
-            background: rgba(181, 101, 216, 0.1);
-            border-color: var(--primary-violet);
-        }
-
-        .feature-item i {
-            color: var(--primary-violet);
-            font-size: 1.5rem;
-            margin-top: 0.2rem;
-            flex-shrink: 0;
-        }
-
-        .feature-text h4 {
-            color: white;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .feature-text p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        .service-pricing {
-            background: rgba(233, 75, 122, 0.05);
-            border: 1px solid var(--border-color);
-            border-radius: var(--radius-md);
-            padding: 2rem;
-            margin-top: 2rem;
-        }
-
-        .pricing-header {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .pricing-header i {
-            color: var(--primary-pink);
-            font-size: 1.5rem;
-        }
-
-        .pricing-header h4 {
-            color: white;
-            font-size: 1.3rem;
-            font-weight: 600;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .pricing-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-sm);
-        }
-
-        .pricing-item span:first-child {
-            color: var(--text-secondary);
-        }
-
-        .pricing-item span:last-child {
-            color: var(--primary-violet);
-            font-weight: 700;
-            font-size: 1.1rem;
-        }
-
-        .cta-section {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, rgba(181, 101, 216, 0.1) 0%, rgba(233, 75, 122, 0.1) 100%);
-            text-align: center;
-        }
-
-        .cta-content h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: white;
-            margin-bottom: 1rem;
-        }
-
-        .cta-content p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        @media (max-width: 768px) {
-            .services-hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .service-header {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .service-header-text h3 {
-                font-size: 1.5rem;
-            }
-
-            .service-features {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/services-modern.css">
 </head>
 <body>
-    <!-- NAVBAR -->
     <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="container">
@@ -287,7 +40,9 @@
                 </ul>
 
                 <div class="nav-actions">
-                    <a href="#contact" class="btn btn-primary">Nous Trouver</a>
+                    <a href="trouver-station.html" class="btn btn-primary">
+                        <i class="fas fa-location-arrow"></i> Trouver une Station
+                    </a>
                     <button class="mobile-toggle" id="mobileToggle">
                         <span></span>
                         <span></span>
@@ -298,488 +53,429 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="services-hero">
+    <!-- Hero Section -->
+    <section class="page-hero">
         <div class="container">
-            <h1 data-aos="fade-up">Nos Services</h1>
-            <p data-aos="fade-up" data-aos-delay="100">
-                Des services complets pour répondre à tous vos besoins automobiles
-            </p>
+            <div class="page-hero-content" data-aos="fade-up">
+                <h1 class="page-title">
+                    Nos <span class="gradient-text">Services</span>
+                </h1>
+                <p class="page-subtitle">
+                    Des solutions complètes pour tous vos besoins automobiles
+                </p>
+            </div>
         </div>
     </section>
 
-    <!-- SERVICES CONTENT -->
-    <section class="services-content">
-        <div class="container">
-
-            <!-- Service 1: Carburants Premium -->
-            <div class="service-detail-card" data-aos="fade-up">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-gas-pump"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Carburants Premium</h3>
-                        <p>Des carburants de qualité supérieure pour votre véhicule</p>
+    <!-- Service 1: Carburant Premium -->
+    <section class="service-modern">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-image" data-aos="fade-right">
+                    <div class="image-wrapper">
+                        <img src="assets/images/carburant.webp" alt="Carburant Premium">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-gas-pump"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Nous proposons une gamme complète de carburants de qualité supérieure, certifiés et contrôlés
-                        régulièrement pour garantir les meilleures performances à votre véhicule. Nos carburants répondent
-                        aux normes internationales les plus strictes et sont distribués avec précision grâce à nos pompes
-                        modernes et calibrées.
+                <div class="service-modern-content" data-aos="fade-left">
+                    <span class="service-label">Service Principal</span>
+                    <h2 class="service-modern-title">Carburant Premium</h2>
+                    <p class="service-modern-description">
+                        Nous proposons une gamme complète de carburants de haute qualité pour assurer les performances optimales de votre véhicule. Nos carburants répondent aux normes internationales les plus strictes.
                     </p>
 
                     <div class="service-features">
                         <div class="feature-item">
-                            <i class="fas fa-certificate"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Qualité Certifiée</h4>
-                                <p>Carburants conformes aux normes internationales ISO</p>
+                                <h4>Essence Sans Plomb</h4>
+                                <p>95 et 98 octanes pour tous types de véhicules</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-flask"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Sans Plomb 95 & 98</h4>
-                                <p>Carburants sans plomb pour moteurs essence modernes</p>
+                                <h4>Diesel Premium</h4>
+                                <p>Performances accrues et consommation réduite</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-truck"></i>
-                            <div class="feature-text">
-                                <h4>Gasoil Premium</h4>
-                                <p>Diesel haute performance pour tous types de véhicules</p>
+                            <div class="feature-icon">
+                                <i class="fas fa-check-circle"></i>
                             </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-shield-alt"></i>
                             <div class="feature-text">
-                                <h4>Additifs Protecteurs</h4>
-                                <p>Formules enrichies pour protéger votre moteur</p>
+                                <h4>Additifs de Qualité</h4>
+                                <p>Protection moteur et nettoyage du système d'injection</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="service-pricing">
-                        <div class="pricing-header">
-                            <i class="fas fa-tag"></i>
-                            <h4>Tarifs du Carburant</h4>
-                        </div>
-                        <div class="pricing-grid">
-                            <div class="pricing-item">
-                                <span>Sans Plomb 95</span>
-                                <span>775 FCFA/L</span>
-                            </div>
-                            <div class="pricing-item">
-                                <span>Sans Plomb 98</span>
-                                <span>825 FCFA/L</span>
-                            </div>
-                            <div class="pricing-item">
-                                <span>Gasoil</span>
-                                <span>715 FCFA/L</span>
-                            </div>
-                        </div>
+                    <div class="service-cta">
+                        <a href="stations.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Trouver une Station
+                        </a>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Service 1.5: Carburants Spécialisés (Pirogues & Industries) -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="50">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-ship"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Carburants Spécialisés</h3>
-                        <p>Solutions pour pirogues et industries</p>
-                    </div>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        WinOil est un acteur majeur de la distribution de carburant pour les pirogues de pêche et
-                        les industries. Nous comprenons les besoins spécifiques du secteur maritime et industriel
-                        sénégalais. Notre carburant marine et nos solutions de livraison en gros volume font de nous
-                        le partenaire privilégié des pêcheurs de Rufisque et des entreprises industrielles de la région.
+    <!-- Service 2: Carburants Spécialisés -->
+    <section class="service-modern service-modern-reverse">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-content" data-aos="fade-right">
+                    <span class="service-label">Spécialisations</span>
+                    <h2 class="service-modern-title">Carburants Spécialisés</h2>
+                    <p class="service-modern-description">
+                        Nous comprenons les besoins spécifiques des professionnels de la pêche et de l'industrie. C'est pourquoi nous proposons des solutions adaptées à vos activités.
                     </p>
 
                     <div class="service-features">
                         <div class="feature-item">
-                            <i class="fas fa-anchor"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-ship"></i>
+                            </div>
                             <div class="feature-text">
                                 <h4>Carburant Marine</h4>
-                                <p>Gasoil spécial pour moteurs de pirogues et embarcations de pêche</p>
+                                <p>Diesel spécial pour pirogues et embarcations</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-fish"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-industry"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Service Pêcheurs</h4>
-                                <p>Tarifs préférentiels et service dédié aux professionnels de la pêche</p>
+                                <h4>Solutions Industrielles</h4>
+                                <p>Livraison en vrac et contrats professionnels</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-industry"></i>
-                            <div class="feature-text">
-                                <h4>Livraison Industrielle</h4>
-                                <p>Approvisionnement en gros volumes pour usines et industries</p>
+                            <div class="feature-icon">
+                                <i class="fas fa-truck"></i>
                             </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-drum"></i>
-                            <div class="feature-text">
-                                <h4>Vente en Fûts</h4>
-                                <p>Conditionnement adapté aux besoins professionnels</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-truck-loading"></i>
                             <div class="feature-text">
                                 <h4>Livraison sur Site</h4>
-                                <p>Service de livraison directe sur votre lieu d'activité</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-handshake"></i>
-                            <div class="feature-text">
-                                <h4>Contrats Professionnels</h4>
-                                <p>Conventions adaptées aux besoins des grandes consommations</p>
+                                <p>Service de livraison rapide et fiable</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="service-pricing">
-                        <div class="pricing-header">
-                            <i class="fas fa-tag"></i>
-                            <h4>Solutions sur Mesure</h4>
-                        </div>
-                        <div style="padding: 1rem; text-align: center;">
-                            <p style="color: var(--text-secondary); margin-bottom: 1rem;">
-                                Les tarifs sont négociables selon les volumes et la nature du contrat.
-                            </p>
-                            <a href="contact.html" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 1rem 2rem; text-decoration: none;">
-                                <i class="fas fa-envelope"></i>
-                                Demander un Devis
-                            </a>
-                        </div>
+                    <div class="service-cta">
+                        <a href="contact.html" class="btn btn-outline btn-lg">
+                            <i class="fas fa-file-invoice"></i>
+                            Demander un Devis
+                        </a>
                     </div>
                 </div>
-            </div>
-
-            <!-- Service 2: Lavage Auto -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-car-wash"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Lavage Auto Professionnel</h3>
-                        <p>Un nettoyage complet pour votre véhicule</p>
-                    </div>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Notre service de lavage automobile professionnel utilise des équipements de pointe et des produits
-                        écologiques pour garantir un nettoyage impeccable de votre véhicule. De l'extérieur à l'intérieur,
-                        nos équipes qualifiées prennent soin de votre voiture avec attention et professionnalisme.
-                    </p>
-
-                    <div class="service-features">
-                        <div class="feature-item">
-                            <i class="fas fa-spray-can"></i>
-                            <div class="feature-text">
-                                <h4>Lavage Extérieur</h4>
-                                <p>Nettoyage haute pression de la carrosserie et des jantes</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-chair"></i>
-                            <div class="feature-text">
-                                <h4>Nettoyage Intérieur</h4>
-                                <p>Aspiration complète et nettoyage des sièges</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-leaf"></i>
-                            <div class="feature-text">
-                                <h4>Produits Écologiques</h4>
-                                <p>Shampooings biodégradables et respectueux de l'environnement</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-gem"></i>
-                            <div class="feature-text">
-                                <h4>Finition Brillance</h4>
-                                <p>Cire de protection et lustrage pour un éclat durable</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="service-pricing">
-                        <div class="pricing-header">
-                            <i class="fas fa-tag"></i>
-                            <h4>Tarifs Lavage</h4>
-                        </div>
-                        <div class="pricing-grid">
-                            <div class="pricing-item">
-                                <span>Lavage Simple</span>
-                                <span>2 500 FCFA</span>
-                            </div>
-                            <div class="pricing-item">
-                                <span>Lavage Complet</span>
-                                <span>5 000 FCFA</span>
-                            </div>
-                            <div class="pricing-item">
-                                <span>Lavage Premium</span>
-                                <span>8 000 FCFA</span>
+                <div class="service-modern-image" data-aos="fade-left">
+                    <div class="image-wrapper">
+                        <img src="assets/images/pirogue.jpg" alt="Carburants Spécialisés">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-ship"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Service 3: Vidange & Huile -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-oil-can"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Vidange & Huile Moteur</h3>
-                        <p>L'entretien essentiel de votre moteur</p>
+    <!-- Service 3: Lavage Auto -->
+    <section class="service-modern">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-image" data-aos="fade-right">
+                    <div class="image-wrapper">
+                        <img src="assets/images/carburantvoiture.jpg" alt="Lavage Auto">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-spray-can"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Un moteur bien entretenu est la clé de la longévité de votre véhicule. Notre service de vidange
-                        utilise uniquement des huiles moteur de marques reconnues, adaptées aux spécifications de votre
-                        véhicule. Nos mécaniciens expérimentés effectuent également un contrôle complet de votre moteur
-                        lors de chaque intervention.
+                <div class="service-modern-content" data-aos="fade-left">
+                    <span class="service-label">Entretien</span>
+                    <h2 class="service-modern-title">Lavage Automobile</h2>
+                    <p class="service-modern-description">
+                        Notre service de lavage professionnel utilise des équipements de pointe et des produits écologiques pour redonner à votre véhicule tout son éclat.
                     </p>
 
-                    <div class="service-features">
-                        <div class="feature-item">
-                            <i class="fas fa-tools"></i>
-                            <div class="feature-text">
-                                <h4>Vidange Complète</h4>
-                                <p>Changement d'huile moteur et du filtre à huile</p>
+                    <div class="pricing-grid">
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4>Lavage Simple</h4>
+                                <div class="pricing-amount">
+                                    <span class="price">2 500</span>
+                                    <span class="currency">FCFA</span>
+                                </div>
                             </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Lavage extérieur</li>
+                                <li><i class="fas fa-check"></i> Rinçage haute pression</li>
+                                <li><i class="fas fa-check"></i> Séchage</li>
+                            </ul>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-tint"></i>
-                            <div class="feature-text">
-                                <h4>Huiles Premium</h4>
-                                <p>Huiles synthétiques et semi-synthétiques de qualité</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-double"></i>
-                            <div class="feature-text">
-                                <h4>Contrôle Gratuit</h4>
-                                <p>Vérification des niveaux et inspection visuelle moteur</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-clipboard-list"></i>
-                            <div class="feature-text">
-                                <h4>Carnet d'Entretien</h4>
-                                <p>Suivi personnalisé de l'historique d'entretien</p>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="service-pricing">
-                        <div class="pricing-header">
-                            <i class="fas fa-tag"></i>
-                            <h4>Tarifs Vidange</h4>
+                        <div class="pricing-card pricing-card-featured">
+                            <div class="featured-badge">Populaire</div>
+                            <div class="pricing-header">
+                                <h4>Lavage Complet</h4>
+                                <div class="pricing-amount">
+                                    <span class="price">5 000</span>
+                                    <span class="currency">FCFA</span>
+                                </div>
+                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Tout du Lavage Simple</li>
+                                <li><i class="fas fa-check"></i> Nettoyage intérieur</li>
+                                <li><i class="fas fa-check"></i> Aspiration</li>
+                                <li><i class="fas fa-check"></i> Lustrage carrosserie</li>
+                            </ul>
                         </div>
-                        <div class="pricing-grid">
-                            <div class="pricing-item">
-                                <span>Vidange Standard</span>
-                                <span>15 000 FCFA</span>
+
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <h4>Lavage Premium</h4>
+                                <div class="pricing-amount">
+                                    <span class="price">8 000</span>
+                                    <span class="currency">FCFA</span>
+                                </div>
                             </div>
-                            <div class="pricing-item">
-                                <span>Vidange Semi-Synthèse</span>
-                                <span>25 000 FCFA</span>
-                            </div>
-                            <div class="pricing-item">
-                                <span>Vidange Synthèse</span>
-                                <span>35 000 FCFA</span>
-                            </div>
+                            <ul class="pricing-features">
+                                <li><i class="fas fa-check"></i> Tout du Lavage Complet</li>
+                                <li><i class="fas fa-check"></i> Polissage carrosserie</li>
+                                <li><i class="fas fa-check"></i> Nettoyage moteur</li>
+                                <li><i class="fas fa-check"></i> Traitement jantes</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Service 4: Boutique -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="300">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-store"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Boutique & Accessoires</h3>
-                        <p>Tout pour votre confort et vos besoins</p>
-                    </div>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Notre boutique vous propose une large gamme de produits et d'accessoires pour votre véhicule
-                        et votre confort. Des accessoires automobiles aux produits d'entretien, en passant par des
-                        snacks et boissons, nous avons tout ce dont vous avez besoin lors de vos déplacements.
+    <!-- Service 4: Vidange & Huile -->
+    <section class="service-modern service-modern-reverse">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-content" data-aos="fade-right">
+                    <span class="service-label">Maintenance</span>
+                    <h2 class="service-modern-title">Vidange & Huile Moteur</h2>
+                    <p class="service-modern-description">
+                        Un entretien régulier est essentiel pour la longévité de votre moteur. Nos techniciens qualifiés utilisent des huiles certifiées et adaptées à votre véhicule.
                     </p>
 
                     <div class="service-features">
                         <div class="feature-item">
-                            <i class="fas fa-car"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-oil-can"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Accessoires Auto</h4>
-                                <p>Tapis, parfums, chargeurs et équipements divers</p>
+                                <h4>Huiles de Qualité</h4>
+                                <p>Synthétiques et minérales de grandes marques</p>
                             </div>
                         </div>
-                        <div class="feature-item">
-                            <i class="fas fa-shopping-bag"></i>
-                            <div class="feature-text">
-                                <h4>Produits d'Entretien</h4>
-                                <p>Shampooings, cires, nettoyants et polish</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-coffee"></i>
-                            <div class="feature-text">
-                                <h4>Snacks & Boissons</h4>
-                                <p>Rafraîchissements, café, eau et collations</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-wrench"></i>
-                            <div class="feature-text">
-                                <h4>Pièces de Base</h4>
-                                <p>Ampoules, fusibles, balais d'essuie-glace</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Service 5: Gonflage Pneus -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="400">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-tire"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Gonflage Pneus</h3>
-                        <p>Service gratuit pour votre sécurité</p>
-                    </div>
-                </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        La pression de vos pneus est cruciale pour votre sécurité et votre consommation de carburant.
-                        Nous offrons un service gratuit de gonflage de pneus avec vérification de la pression recommandée
-                        par le constructeur. Nos compresseurs modernes garantissent un gonflage précis et rapide.
-                    </p>
-
-                    <div class="service-features">
                         <div class="feature-item">
-                            <i class="fas fa-gift"></i>
-                            <div class="feature-text">
-                                <h4>Service Gratuit</h4>
-                                <p>Gonflage gratuit pour tous nos clients</p>
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
                             </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-tachometer-alt"></i>
-                            <div class="feature-text">
-                                <h4>Vérification Pression</h4>
-                                <p>Contrôle avec manomètre de précision</p>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-clock"></i>
                             <div class="feature-text">
                                 <h4>Service Rapide</h4>
-                                <p>Gonflage en quelques minutes</p>
+                                <p>Vidange complète en moins de 30 minutes</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-user-check"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Conseil Personnalisé</h4>
-                                <p>Recommandations selon votre véhicule</p>
+                                <h4>Contrôle Gratuit</h4>
+                                <p>Vérification des niveaux et points de contrôle</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">15<span>min</span></div>
+                            <div class="stat-label">Temps moyen</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5<span>ans</span></div>
+                            <div class="stat-label">Garantie moteur</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100<span>%</span></div>
+                            <div class="stat-label">Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-modern-image" data-aos="fade-left">
+                    <div class="image-wrapper">
+                        <img src="assets/images/station.jpg" alt="Vidange & Huile">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-oil-can"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Service 6: Service Flotte -->
-            <div class="service-detail-card" data-aos="fade-up" data-aos-delay="500">
-                <div class="service-header">
-                    <div class="service-icon-large">
-                        <i class="fas fa-trucks"></i>
-                    </div>
-                    <div class="service-header-text">
-                        <h3>Service Flotte Entreprise</h3>
-                        <p>Solutions sur mesure pour les professionnels</p>
+    <!-- Service 5: Boutique -->
+    <section class="service-modern">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-image" data-aos="fade-right">
+                    <div class="image-wrapper">
+                        <img src="assets/images/station.jpg" alt="Boutique">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="service-body">
-                    <p class="service-description">
-                        Nous proposons des solutions complètes pour les entreprises et les gestionnaires de flottes.
-                        Cartes de carburant, facturation centralisée, rapports détaillés et tarifs préférentiels :
-                        bénéficiez d'un service dédié pour optimiser la gestion de votre parc automobile.
+                <div class="service-modern-content" data-aos="fade-left">
+                    <span class="service-label">Shopping</span>
+                    <h2 class="service-modern-title">Boutique & Accessoires</h2>
+                    <p class="service-modern-description">
+                        Nos boutiques proposent une large gamme de produits pour votre véhicule et votre confort lors de vos déplacements.
+                    </p>
+
+                    <div class="products-grid">
+                        <div class="product-category">
+                            <i class="fas fa-car-battery"></i>
+                            <h4>Accessoires Auto</h4>
+                            <p>Huiles, filtres, balais d'essuie-glace</p>
+                        </div>
+                        <div class="product-category">
+                            <i class="fas fa-spray-can"></i>
+                            <h4>Produits d'Entretien</h4>
+                            <p>Shampoings, polish, produits nettoyants</p>
+                        </div>
+                        <div class="product-category">
+                            <i class="fas fa-coffee"></i>
+                            <h4>Snacks & Boissons</h4>
+                            <p>Rafraîchissements et encas</p>
+                        </div>
+                        <div class="product-category">
+                            <i class="fas fa-mobile-alt"></i>
+                            <h4>Téléphonie</h4>
+                            <p>Recharge crédit et accessoires</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service 6: Solutions Flottes -->
+    <section class="service-modern service-modern-reverse">
+        <div class="container-wide">
+            <div class="service-modern-grid">
+                <div class="service-modern-content" data-aos="fade-right">
+                    <span class="service-label">Entreprises</span>
+                    <h2 class="service-modern-title">Solutions pour Flottes</h2>
+                    <p class="service-modern-description">
+                        Optimisez la gestion de votre flotte avec nos solutions professionnelles : cartes entreprise, facturation centralisée et tarifs préférentiels.
                     </p>
 
                     <div class="service-features">
                         <div class="feature-item">
-                            <i class="fas fa-credit-card"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
                             <div class="feature-text">
                                 <h4>Cartes Entreprise</h4>
-                                <p>Cartes de carburant nominatives pour vos véhicules</p>
+                                <p>Gestion simplifiée et contrôle des dépenses</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-percent"></i>
-                            <div class="feature-text">
-                                <h4>Tarifs Préférentiels</h4>
-                                <p>Remises selon le volume consommé</p>
+                            <div class="feature-icon">
+                                <i class="fas fa-file-invoice-dollar"></i>
                             </div>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-file-invoice"></i>
                             <div class="feature-text">
                                 <h4>Facturation Centralisée</h4>
                                 <p>Une seule facture mensuelle détaillée</p>
                             </div>
                         </div>
+
                         <div class="feature-item">
-                            <i class="fas fa-chart-line"></i>
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
                             <div class="feature-text">
-                                <h4>Rapports de Gestion</h4>
-                                <p>Suivi de consommation et statistiques</p>
+                                <h4>Suivi en Temps Réel</h4>
+                                <p>Dashboard en ligne pour suivre les consommations</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Tarifs Préférentiels</h4>
+                                <p>Remises attractives selon le volume</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="service-cta">
+                        <a href="contact.html" class="btn btn-primary btn-lg">
+                            <i class="fas fa-handshake"></i>
+                            Devenir Partenaire
+                        </a>
+                    </div>
+                </div>
+                <div class="service-modern-image" data-aos="fade-left">
+                    <div class="image-wrapper">
+                        <img src="assets/images/industrie.jpg" alt="Solutions Flottes">
+                        <div class="image-overlay">
+                            <div class="service-badge">
+                                <i class="fas fa-truck"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- CTA SECTION -->
+    <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
             <div class="cta-content" data-aos="fade-up">
-                <h2>Besoin d'un Service ?</h2>
-                <p>Visitez l'une de nos stations ou contactez-nous pour plus d'informations</p>
+                <h2>Prêt à profiter de nos services ?</h2>
+                <p>Visitez l'une de nos stations dès aujourd'hui</p>
                 <div class="cta-buttons">
-                    <a href="stations.html" class="btn btn-primary">
-                        <i class="fas fa-map-marker-alt"></i>
+                    <a href="trouver-station.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-location-arrow"></i>
                         Trouver une Station
                     </a>
-                    <a href="contact.html" class="btn btn-secondary">
+                    <a href="contact.html" class="btn btn-outline btn-lg">
                         <i class="fas fa-envelope"></i>
                         Nous Contacter
                     </a>
@@ -788,46 +484,40 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-col">
-                    <div class="footer-logo">
-                        <i class="fas fa-gas-pump"></i>
-                        <span>WinOil</span>
-                    </div>
-                    <p class="footer-desc">
-                        Votre réseau de stations-service de confiance au Sénégal.
-                        Qualité, service et innovation depuis plus de 10 ans.
+                    <img src="assets/images/logo.png" alt="WinOil Logo" class="footer-logo">
+                    <p class="footer-description">
+                        Votre station-service de confiance au Sénégal. Qualité, rapidité et service d'excellence.
                     </p>
-                    <div class="social-links">
+                    <div class="footer-social">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
                         <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Liens Rapides</h4>
+                    <h4>Navigation</h4>
                     <ul class="footer-links">
                         <li><a href="index.html">Accueil</a></li>
                         <li><a href="about.html">À Propos</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="stations.html">Nos Stations</a></li>
+                        <li><a href="services.html">Nos Services</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h4>Nos Services</h4>
+                    <h4>Services</h4>
                     <ul class="footer-links">
-                        <li><a href="services.html#carburant">Carburant Premium</a></li>
-                        <li><a href="services.html#lavage">Lavage Auto</a></li>
-                        <li><a href="services.html#vidange">Vidange & Huile</a></li>
-                        <li><a href="services.html#boutique">Boutique</a></li>
-                        <li><a href="services.html#flotte">Service Flotte</a></li>
+                        <li><a href="services.html">Carburant Premium</a></li>
+                        <li><a href="services.html">Lavage Auto</a></li>
+                        <li><a href="services.html">Vidange & Huile</a></li>
+                        <li><a href="services.html">Service Flotte</a></li>
                     </ul>
                 </div>
 
@@ -835,38 +525,41 @@
                     <h4>Contact</h4>
                     <ul class="footer-contact">
                         <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Route de Rufisque, Dakar</span>
+                        </li>
+                        <li>
                             <i class="fas fa-phone"></i>
-                            <span>+221 33 860 00 00</span>
+                            <a href="tel:+221338600000">+221 33 860 00 00</a>
                         </li>
                         <li>
                             <i class="fas fa-envelope"></i>
-                            <span>contact@winoil.sn</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span>Rufisque, Dakar, Sénégal</span>
-                        </li>
-                        <li>
-                            <i class="fas fa-clock"></i>
-                            <span>24h/24 - 7j/7</span>
+                            <a href="mailto:contact@winoil.sn">contact@winoil.sn</a>
                         </li>
                     </ul>
                 </div>
             </div>
 
             <div class="footer-bottom">
-                <p>&copy; 2024 WinOil Station. Tous droits réservés.</p>
-                <div class="footer-bottom-links">
-                    <a href="#">Mentions Légales</a>
-                    <a href="#">Politique de Confidentialité</a>
-                    <a href="#">CGU</a>
+                <p>&copy; 2024 WinOil. Tous droits réservés.</p>
+                <div class="footer-legal">
+                    <a href="#">Mentions légales</a>
+                    <span>|</span>
+                    <a href="#">Politique de confidentialité</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- AOS Animation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+    <!-- Custom JavaScript -->
     <script src="assets/js/main.js"></script>
 </body>
 </html>
